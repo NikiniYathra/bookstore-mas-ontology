@@ -4,7 +4,8 @@
          xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
          xmlns:owl="http://www.w3.org/2002/07/owl#"
          xml:base="http://example.org/bookstore"
-         xmlns="http://example.org/bookstore#">
+         xmlns="http://example.org/bookstore#"
+         xmlns:swrl="http://www.w3.org/2003/11/swrl#">
 
 <owl:Ontology rdf:about="http://example.org/bookstore"/>
 
@@ -78,6 +79,11 @@
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
 </owl:DatatypeProperty>
 
+<owl:DatatypeProperty rdf:about="#HasBudget">
+  <rdfs:domain rdf:resource="#Customer"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+</owl:DatatypeProperty>
+
 <owl:Class rdf:about="#Book">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
 </owl:Class>
@@ -102,56 +108,827 @@
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
 </owl:Class>
 
-<owl:NamedIndividual rdf:about="#9780143127741">
+<owl:NamedIndividual rdf:about="#9781000000001">
   <rdf:type rdf:resource="#Book"/>
-  <HasInventory rdf:resource="#inv_9780143127741"/>
-  <HasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sapiens</HasTitle>
-  <HasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Yuval Noah Harari</HasAuthor>
-  <HasGenre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Non-Fiction</HasGenre>
-  <HasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">19.99</HasPrice>
-</owl:NamedIndividual>
-
-<owl:NamedIndividual rdf:about="#inv_9780143127741">
-  <rdf:type rdf:resource="#Inventory"/>
-  <TracksBook rdf:resource="#9780143127741"/>
-  <AvailableQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">12</AvailableQuantity>
-  <LowThreshold rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">11</LowThreshold>
-  <NeedsRestock rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</NeedsRestock>
-</owl:NamedIndividual>
-
-<owl:NamedIndividual rdf:about="#9780062315007">
-  <rdf:type rdf:resource="#Book"/>
-  <HasInventory rdf:resource="#inv_9780062315007"/>
+  <HasInventory rdf:resource="#inv_9781000000001"/>
   <HasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The Alchemist</HasTitle>
   <HasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Paulo Coelho</HasAuthor>
   <HasGenre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fiction</HasGenre>
   <HasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">14.99</HasPrice>
 </owl:NamedIndividual>
 
-<owl:NamedIndividual rdf:about="#inv_9780062315007">
+<owl:NamedIndividual rdf:about="#inv_9781000000001">
   <rdf:type rdf:resource="#Inventory"/>
-  <TracksBook rdf:resource="#9780062315007"/>
-  <AvailableQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8</AvailableQuantity>
-  <LowThreshold rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7</LowThreshold>
+  <TracksBook rdf:resource="#9781000000001"/>
+  <LowThreshold rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</LowThreshold>
+  <NeedsRestock rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</NeedsRestock>
+  <AvailableQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">13</AvailableQuantity>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#9781000000002">
+  <rdf:type rdf:resource="#Book"/>
+  <HasInventory rdf:resource="#inv_9781000000002"/>
+  <HasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Normal People</HasTitle>
+  <HasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sally Rooney</HasAuthor>
+  <HasGenre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fiction</HasGenre>
+  <HasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">13.49</HasPrice>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#inv_9781000000002">
+  <rdf:type rdf:resource="#Inventory"/>
+  <TracksBook rdf:resource="#9781000000002"/>
+  <LowThreshold rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</LowThreshold>
+  <NeedsRestock rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</NeedsRestock>
+  <AvailableQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7</AvailableQuantity>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#9781000000003">
+  <rdf:type rdf:resource="#Book"/>
+  <HasInventory rdf:resource="#inv_9781000000003"/>
+  <HasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Where the Crawdads Sing</HasTitle>
+  <HasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Delia Owens</HasAuthor>
+  <HasGenre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fiction</HasGenre>
+  <HasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">16.99</HasPrice>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#inv_9781000000003">
+  <rdf:type rdf:resource="#Inventory"/>
+  <TracksBook rdf:resource="#9781000000003"/>
+  <LowThreshold rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</LowThreshold>
+  <AvailableQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">14</AvailableQuantity>
   <NeedsRestock rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</NeedsRestock>
 </owl:NamedIndividual>
 
-<owl:NamedIndividual rdf:about="#9780590353427">
+<owl:NamedIndividual rdf:about="#9781000000004">
   <rdf:type rdf:resource="#Book"/>
-  <HasInventory rdf:resource="#inv_9780590353427"/>
+  <HasInventory rdf:resource="#inv_9781000000004"/>
+  <HasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The Kite Runner</HasTitle>
+  <HasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Khaled Hosseini</HasAuthor>
+  <HasGenre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fiction</HasGenre>
+  <HasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">12.99</HasPrice>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#inv_9781000000004">
+  <rdf:type rdf:resource="#Inventory"/>
+  <TracksBook rdf:resource="#9781000000004"/>
+  <LowThreshold rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</LowThreshold>
+  <NeedsRestock rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</NeedsRestock>
+  <AvailableQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">9</AvailableQuantity>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#9781000000005">
+  <rdf:type rdf:resource="#Book"/>
+  <HasInventory rdf:resource="#inv_9781000000005"/>
+  <HasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The Night Circus</HasTitle>
+  <HasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Erin Morgenstern</HasAuthor>
+  <HasGenre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fiction</HasGenre>
+  <HasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">11.49</HasPrice>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#inv_9781000000005">
+  <rdf:type rdf:resource="#Inventory"/>
+  <TracksBook rdf:resource="#9781000000005"/>
+  <LowThreshold rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</LowThreshold>
+  <NeedsRestock rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</NeedsRestock>
+  <AvailableQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</AvailableQuantity>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#9781000000006">
+  <rdf:type rdf:resource="#Book"/>
+  <HasInventory rdf:resource="#inv_9781000000006"/>
   <HasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Harry Potter and the Sorcerer's Stone</HasTitle>
   <HasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">J.K. Rowling</HasAuthor>
   <HasGenre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fantasy</HasGenre>
   <HasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">10.99</HasPrice>
 </owl:NamedIndividual>
 
-<owl:NamedIndividual rdf:about="#inv_9780590353427">
+<owl:NamedIndividual rdf:about="#inv_9781000000006">
   <rdf:type rdf:resource="#Inventory"/>
-  <TracksBook rdf:resource="#9780590353427"/>
+  <TracksBook rdf:resource="#9781000000006"/>
+  <LowThreshold rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</LowThreshold>
+  <NeedsRestock rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</NeedsRestock>
+  <AvailableQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">12</AvailableQuantity>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#9781000000007">
+  <rdf:type rdf:resource="#Book"/>
+  <HasInventory rdf:resource="#inv_9781000000007"/>
+  <HasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The Name of the Wind</HasTitle>
+  <HasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Patrick Rothfuss</HasAuthor>
+  <HasGenre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fantasy</HasGenre>
+  <HasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">18.99</HasPrice>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#inv_9781000000007">
+  <rdf:type rdf:resource="#Inventory"/>
+  <TracksBook rdf:resource="#9781000000007"/>
+  <LowThreshold rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</LowThreshold>
+  <NeedsRestock rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</NeedsRestock>
+  <AvailableQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8</AvailableQuantity>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#9781000000008">
+  <rdf:type rdf:resource="#Book"/>
+  <HasInventory rdf:resource="#inv_9781000000008"/>
+  <HasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mistborn: The Final Empire</HasTitle>
+  <HasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Brandon Sanderson</HasAuthor>
+  <HasGenre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fantasy</HasGenre>
+  <HasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">15.99</HasPrice>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#inv_9781000000008">
+  <rdf:type rdf:resource="#Inventory"/>
+  <TracksBook rdf:resource="#9781000000008"/>
+  <LowThreshold rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</LowThreshold>
+  <NeedsRestock rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</NeedsRestock>
   <AvailableQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</AvailableQuantity>
-  <LowThreshold rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</LowThreshold>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#9781000000009">
+  <rdf:type rdf:resource="#Book"/>
+  <HasInventory rdf:resource="#inv_9781000000009"/>
+  <HasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The Way of Kings</HasTitle>
+  <HasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Brandon Sanderson</HasAuthor>
+  <HasGenre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fantasy</HasGenre>
+  <HasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">19.49</HasPrice>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#inv_9781000000009">
+  <rdf:type rdf:resource="#Inventory"/>
+  <TracksBook rdf:resource="#9781000000009"/>
+  <AvailableQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">11</AvailableQuantity>
+  <LowThreshold rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</LowThreshold>
   <NeedsRestock rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</NeedsRestock>
 </owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#9781000000010">
+  <rdf:type rdf:resource="#Book"/>
+  <HasInventory rdf:resource="#inv_9781000000010"/>
+  <HasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The Hobbit</HasTitle>
+  <HasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">J.R.R. Tolkien</HasAuthor>
+  <HasGenre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fantasy</HasGenre>
+  <HasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">9.99</HasPrice>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#inv_9781000000010">
+  <rdf:type rdf:resource="#Inventory"/>
+  <TracksBook rdf:resource="#9781000000010"/>
+  <AvailableQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8</AvailableQuantity>
+  <LowThreshold rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</LowThreshold>
+  <NeedsRestock rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</NeedsRestock>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#9781000000011">
+  <rdf:type rdf:resource="#Book"/>
+  <HasInventory rdf:resource="#inv_9781000000011"/>
+  <HasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Dune</HasTitle>
+  <HasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Frank Herbert</HasAuthor>
+  <HasGenre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sci-Fi</HasGenre>
+  <HasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">17.99</HasPrice>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#inv_9781000000011">
+  <rdf:type rdf:resource="#Inventory"/>
+  <TracksBook rdf:resource="#9781000000011"/>
+  <LowThreshold rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</LowThreshold>
+  <NeedsRestock rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</NeedsRestock>
+  <AvailableQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">12</AvailableQuantity>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#9781000000012">
+  <rdf:type rdf:resource="#Book"/>
+  <HasInventory rdf:resource="#inv_9781000000012"/>
+  <HasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Neuromancer</HasTitle>
+  <HasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">William Gibson</HasAuthor>
+  <HasGenre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sci-Fi</HasGenre>
+  <HasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">13.99</HasPrice>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#inv_9781000000012">
+  <rdf:type rdf:resource="#Inventory"/>
+  <TracksBook rdf:resource="#9781000000012"/>
+  <AvailableQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7</AvailableQuantity>
+  <LowThreshold rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</LowThreshold>
+  <NeedsRestock rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</NeedsRestock>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#9781000000013">
+  <rdf:type rdf:resource="#Book"/>
+  <HasInventory rdf:resource="#inv_9781000000013"/>
+  <HasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Project Hail Mary</HasTitle>
+  <HasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Andy Weir</HasAuthor>
+  <HasGenre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sci-Fi</HasGenre>
+  <HasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21.99</HasPrice>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#inv_9781000000013">
+  <rdf:type rdf:resource="#Inventory"/>
+  <TracksBook rdf:resource="#9781000000013"/>
+  <LowThreshold rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</LowThreshold>
+  <NeedsRestock rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</NeedsRestock>
+  <AvailableQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</AvailableQuantity>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#9781000000014">
+  <rdf:type rdf:resource="#Book"/>
+  <HasInventory rdf:resource="#inv_9781000000014"/>
+  <HasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The Martian</HasTitle>
+  <HasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Andy Weir</HasAuthor>
+  <HasGenre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sci-Fi</HasGenre>
+  <HasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">11.99</HasPrice>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#inv_9781000000014">
+  <rdf:type rdf:resource="#Inventory"/>
+  <TracksBook rdf:resource="#9781000000014"/>
+  <AvailableQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">12</AvailableQuantity>
+  <LowThreshold rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</LowThreshold>
+  <NeedsRestock rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</NeedsRestock>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#9781000000015">
+  <rdf:type rdf:resource="#Book"/>
+  <HasInventory rdf:resource="#inv_9781000000015"/>
+  <HasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Foundation</HasTitle>
+  <HasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Isaac Asimov</HasAuthor>
+  <HasGenre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sci-Fi</HasGenre>
+  <HasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">12.49</HasPrice>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#inv_9781000000015">
+  <rdf:type rdf:resource="#Inventory"/>
+  <TracksBook rdf:resource="#9781000000015"/>
+  <LowThreshold rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</LowThreshold>
+  <NeedsRestock rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</NeedsRestock>
+  <AvailableQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8</AvailableQuantity>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#9781000000016">
+  <rdf:type rdf:resource="#Book"/>
+  <HasInventory rdf:resource="#inv_9781000000016"/>
+  <HasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sapiens</HasTitle>
+  <HasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Yuval Noah Harari</HasAuthor>
+  <HasGenre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Non-fiction</HasGenre>
+  <HasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">19.99</HasPrice>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#inv_9781000000016">
+  <rdf:type rdf:resource="#Inventory"/>
+  <TracksBook rdf:resource="#9781000000016"/>
+  <LowThreshold rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</LowThreshold>
+  <NeedsRestock rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</NeedsRestock>
+  <AvailableQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7</AvailableQuantity>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#9781000000017">
+  <rdf:type rdf:resource="#Book"/>
+  <HasInventory rdf:resource="#inv_9781000000017"/>
+  <HasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Educated</HasTitle>
+  <HasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tara Westover</HasAuthor>
+  <HasGenre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Non-fiction</HasGenre>
+  <HasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">14.99</HasPrice>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#inv_9781000000017">
+  <rdf:type rdf:resource="#Inventory"/>
+  <TracksBook rdf:resource="#9781000000017"/>
+  <LowThreshold rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</LowThreshold>
+  <NeedsRestock rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</NeedsRestock>
+  <AvailableQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">13</AvailableQuantity>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#9781000000018">
+  <rdf:type rdf:resource="#Book"/>
+  <HasInventory rdf:resource="#inv_9781000000018"/>
+  <HasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Atomic Habits</HasTitle>
+  <HasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">James Clear</HasAuthor>
+  <HasGenre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Non-fiction</HasGenre>
+  <HasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">16.49</HasPrice>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#inv_9781000000018">
+  <rdf:type rdf:resource="#Inventory"/>
+  <TracksBook rdf:resource="#9781000000018"/>
+  <LowThreshold rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</LowThreshold>
+  <NeedsRestock rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</NeedsRestock>
+  <AvailableQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</AvailableQuantity>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#9781000000019">
+  <rdf:type rdf:resource="#Book"/>
+  <HasInventory rdf:resource="#inv_9781000000019"/>
+  <HasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Thinking, Fast and Slow</HasTitle>
+  <HasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Daniel Kahneman</HasAuthor>
+  <HasGenre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Non-fiction</HasGenre>
+  <HasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">18.49</HasPrice>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#inv_9781000000019">
+  <rdf:type rdf:resource="#Inventory"/>
+  <TracksBook rdf:resource="#9781000000019"/>
+  <LowThreshold rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</LowThreshold>
+  <NeedsRestock rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</NeedsRestock>
+  <AvailableQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</AvailableQuantity>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#9781000000020">
+  <rdf:type rdf:resource="#Book"/>
+  <HasInventory rdf:resource="#inv_9781000000020"/>
+  <HasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The Power of Habit</HasTitle>
+  <HasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Charles Duhigg</HasAuthor>
+  <HasGenre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Non-fiction</HasGenre>
+  <HasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">13.49</HasPrice>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#inv_9781000000020">
+  <rdf:type rdf:resource="#Inventory"/>
+  <TracksBook rdf:resource="#9781000000020"/>
+  <AvailableQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10</AvailableQuantity>
+  <LowThreshold rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</LowThreshold>
+  <NeedsRestock rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</NeedsRestock>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#9781000000021">
+  <rdf:type rdf:resource="#Book"/>
+  <HasInventory rdf:resource="#inv_9781000000021"/>
+  <HasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The Girl with the Dragon Tattoo</HasTitle>
+  <HasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Stieg Larsson</HasAuthor>
+  <HasGenre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mystery</HasGenre>
+  <HasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">12.99</HasPrice>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#inv_9781000000021">
+  <rdf:type rdf:resource="#Inventory"/>
+  <TracksBook rdf:resource="#9781000000021"/>
+  <LowThreshold rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</LowThreshold>
+  <NeedsRestock rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</NeedsRestock>
+  <AvailableQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</AvailableQuantity>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#9781000000022">
+  <rdf:type rdf:resource="#Book"/>
+  <HasInventory rdf:resource="#inv_9781000000022"/>
+  <HasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gone Girl</HasTitle>
+  <HasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gillian Flynn</HasAuthor>
+  <HasGenre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mystery</HasGenre>
+  <HasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">11.99</HasPrice>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#inv_9781000000022">
+  <rdf:type rdf:resource="#Inventory"/>
+  <TracksBook rdf:resource="#9781000000022"/>
+  <LowThreshold rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</LowThreshold>
+  <NeedsRestock rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</NeedsRestock>
+  <AvailableQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">13</AvailableQuantity>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#9781000000023">
+  <rdf:type rdf:resource="#Book"/>
+  <HasInventory rdf:resource="#inv_9781000000023"/>
+  <HasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Big Little Lies</HasTitle>
+  <HasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Liane Moriarty</HasAuthor>
+  <HasGenre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mystery</HasGenre>
+  <HasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">10.99</HasPrice>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#inv_9781000000023">
+  <rdf:type rdf:resource="#Inventory"/>
+  <TracksBook rdf:resource="#9781000000023"/>
+  <AvailableQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8</AvailableQuantity>
+  <LowThreshold rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</LowThreshold>
+  <NeedsRestock rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</NeedsRestock>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#9781000000024">
+  <rdf:type rdf:resource="#Book"/>
+  <HasInventory rdf:resource="#inv_9781000000024"/>
+  <HasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The Silent Patient</HasTitle>
+  <HasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alex Michaelides</HasAuthor>
+  <HasGenre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mystery</HasGenre>
+  <HasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">13.99</HasPrice>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#inv_9781000000024">
+  <rdf:type rdf:resource="#Inventory"/>
+  <TracksBook rdf:resource="#9781000000024"/>
+  <LowThreshold rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</LowThreshold>
+  <AvailableQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">14</AvailableQuantity>
+  <NeedsRestock rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</NeedsRestock>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#9781000000025">
+  <rdf:type rdf:resource="#Book"/>
+  <HasInventory rdf:resource="#inv_9781000000025"/>
+  <HasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The Da Vinci Code</HasTitle>
+  <HasAuthor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Dan Brown</HasAuthor>
+  <HasGenre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mystery</HasGenre>
+  <HasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">9.99</HasPrice>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#inv_9781000000025">
+  <rdf:type rdf:resource="#Inventory"/>
+  <TracksBook rdf:resource="#9781000000025"/>
+  <AvailableQuantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">11</AvailableQuantity>
+  <LowThreshold rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</LowThreshold>
+  <NeedsRestock rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</NeedsRestock>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#customer_ava_carter">
+  <rdf:type rdf:resource="#Customer"/>
+  <Purchases rdf:resource="#9781000000006"/>
+  <Purchases rdf:resource="#9781000000011"/>
+  <Purchases rdf:resource="#9781000000005"/>
+  <Purchases rdf:resource="#9781000000002"/>
+  <Purchases rdf:resource="#9781000000019"/>
+  <HasBudget rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">75.0</HasBudget>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#customer_ben_ortiz">
+  <rdf:type rdf:resource="#Customer"/>
+  <Purchases rdf:resource="#9781000000015"/>
+  <Purchases rdf:resource="#9781000000008"/>
+  <Purchases rdf:resource="#9781000000018"/>
+  <Purchases rdf:resource="#9781000000024"/>
+  <HasBudget rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">62.5</HasBudget>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#customer_chloe_nguyen">
+  <rdf:type rdf:resource="#Customer"/>
+  <Purchases rdf:resource="#9781000000017"/>
+  <Purchases rdf:resource="#9781000000001"/>
+  <Purchases rdf:resource="#9781000000005"/>
+  <HasBudget rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">58.0</HasBudget>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#customer_darius_khan">
+  <rdf:type rdf:resource="#Customer"/>
+  <Purchases rdf:resource="#9781000000011"/>
+  <Purchases rdf:resource="#9781000000006"/>
+  <Purchases rdf:resource="#9781000000004"/>
+  <Purchases rdf:resource="#9781000000013"/>
+  <Purchases rdf:resource="#9781000000021"/>
+  <HasBudget rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">81.0</HasBudget>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#customer_elena_martinez">
+  <rdf:type rdf:resource="#Customer"/>
+  <Purchases rdf:resource="#9781000000016"/>
+  <Purchases rdf:resource="#9781000000018"/>
+  <Purchases rdf:resource="#9781000000022"/>
+  <Purchases rdf:resource="#9781000000007"/>
+  <HasBudget rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">69.5</HasBudget>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#customer_farrah_jones">
+  <rdf:type rdf:resource="#Customer"/>
+  <Purchases rdf:resource="#9781000000011"/>
+  <Purchases rdf:resource="#9781000000001"/>
+  <HasBudget rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">54.0</HasBudget>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#employee_0">
+  <rdf:type rdf:resource="#Employee"/>
+  <WorksAt rdf:resource="#inv_9781000000003"/>
+  <WorksAt rdf:resource="#inv_9781000000006"/>
+  <WorksAt rdf:resource="#inv_9781000000022"/>
+  <WorksAt rdf:resource="#inv_9781000000011"/>
+  <WorksAt rdf:resource="#inv_9781000000017"/>
+  <WorksAt rdf:resource="#inv_9781000000001"/>
+  <WorksAt rdf:resource="#inv_9781000000024"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#order_0">
+  <rdf:type rdf:resource="#Order"/>
+  <OrderedBy rdf:resource="#customer_darius_khan"/>
+  <OrderedBook rdf:resource="#9781000000011"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#order_1">
+  <rdf:type rdf:resource="#Order"/>
+  <OrderedBy rdf:resource="#customer_ben_ortiz"/>
+  <OrderedBook rdf:resource="#9781000000015"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#order_2">
+  <rdf:type rdf:resource="#Order"/>
+  <OrderedBy rdf:resource="#customer_chloe_nguyen"/>
+  <OrderedBook rdf:resource="#9781000000017"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#order_3">
+  <rdf:type rdf:resource="#Order"/>
+  <OrderedBy rdf:resource="#customer_ava_carter"/>
+  <OrderedBook rdf:resource="#9781000000006"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#order_4">
+  <rdf:type rdf:resource="#Order"/>
+  <OrderedBy rdf:resource="#customer_chloe_nguyen"/>
+  <OrderedBook rdf:resource="#9781000000001"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#order_5">
+  <rdf:type rdf:resource="#Order"/>
+  <OrderedBy rdf:resource="#customer_ben_ortiz"/>
+  <OrderedBook rdf:resource="#9781000000008"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#order_6">
+  <rdf:type rdf:resource="#Order"/>
+  <OrderedBy rdf:resource="#customer_farrah_jones"/>
+  <OrderedBook rdf:resource="#9781000000011"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#order_7">
+  <rdf:type rdf:resource="#Order"/>
+  <OrderedBy rdf:resource="#customer_ava_carter"/>
+  <OrderedBook rdf:resource="#9781000000011"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#order_8">
+  <rdf:type rdf:resource="#Order"/>
+  <OrderedBy rdf:resource="#customer_darius_khan"/>
+  <OrderedBook rdf:resource="#9781000000006"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#order_9">
+  <rdf:type rdf:resource="#Order"/>
+  <OrderedBy rdf:resource="#customer_chloe_nguyen"/>
+  <OrderedBook rdf:resource="#9781000000005"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#order_10">
+  <rdf:type rdf:resource="#Order"/>
+  <OrderedBy rdf:resource="#customer_farrah_jones"/>
+  <OrderedBook rdf:resource="#9781000000001"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#order_11">
+  <rdf:type rdf:resource="#Order"/>
+  <OrderedBy rdf:resource="#customer_farrah_jones"/>
+  <OrderedBook rdf:resource="#9781000000001"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#order_12">
+  <rdf:type rdf:resource="#Order"/>
+  <OrderedBy rdf:resource="#customer_ava_carter"/>
+  <OrderedBook rdf:resource="#9781000000005"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#order_13">
+  <rdf:type rdf:resource="#Order"/>
+  <OrderedBy rdf:resource="#customer_darius_khan"/>
+  <OrderedBook rdf:resource="#9781000000004"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#order_14">
+  <rdf:type rdf:resource="#Order"/>
+  <OrderedBy rdf:resource="#customer_chloe_nguyen"/>
+  <OrderedBook rdf:resource="#9781000000017"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#order_15">
+  <rdf:type rdf:resource="#Order"/>
+  <OrderedBy rdf:resource="#customer_ava_carter"/>
+  <OrderedBook rdf:resource="#9781000000002"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#order_16">
+  <rdf:type rdf:resource="#Order"/>
+  <OrderedBy rdf:resource="#customer_ava_carter"/>
+  <OrderedBook rdf:resource="#9781000000019"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#order_17">
+  <rdf:type rdf:resource="#Order"/>
+  <OrderedBy rdf:resource="#customer_elena_martinez"/>
+  <OrderedBook rdf:resource="#9781000000016"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#order_18">
+  <rdf:type rdf:resource="#Order"/>
+  <OrderedBy rdf:resource="#customer_ben_ortiz"/>
+  <OrderedBook rdf:resource="#9781000000018"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#order_19">
+  <rdf:type rdf:resource="#Order"/>
+  <OrderedBy rdf:resource="#customer_darius_khan"/>
+  <OrderedBook rdf:resource="#9781000000013"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#order_20">
+  <rdf:type rdf:resource="#Order"/>
+  <OrderedBy rdf:resource="#customer_ben_ortiz"/>
+  <OrderedBook rdf:resource="#9781000000024"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#order_21">
+  <rdf:type rdf:resource="#Order"/>
+  <OrderedBy rdf:resource="#customer_elena_martinez"/>
+  <OrderedBook rdf:resource="#9781000000018"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#order_22">
+  <rdf:type rdf:resource="#Order"/>
+  <OrderedBy rdf:resource="#customer_darius_khan"/>
+  <OrderedBook rdf:resource="#9781000000021"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#order_23">
+  <rdf:type rdf:resource="#Order"/>
+  <OrderedBy rdf:resource="#customer_elena_martinez"/>
+  <OrderedBook rdf:resource="#9781000000022"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#order_24">
+  <rdf:type rdf:resource="#Order"/>
+  <OrderedBy rdf:resource="#customer_elena_martinez"/>
+  <OrderedBook rdf:resource="#9781000000007"/>
+</owl:NamedIndividual>
+
+<swrl:Variable rdf:about="urn:swrl#c"/>
+
+<swrl:Variable rdf:about="urn:swrl#b"/>
+
+<swrl:Variable rdf:about="urn:swrl#i"/>
+
+<swrl:Variable rdf:about="urn:swrl#q"/>
+
+<swrl:Variable rdf:about="urn:swrl#t"/>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#Inventory"/>
+          <swrl:argument1 rdf:resource="urn:swrl#i"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:DatavaluedPropertyAtom>
+              <swrl:propertyPredicate rdf:resource="#AvailableQuantity"/>
+              <swrl:argument1 rdf:resource="urn:swrl#i"/>
+              <swrl:argument2 rdf:resource="urn:swrl#q"/>
+            </swrl:DatavaluedPropertyAtom>
+          </rdf:first>
+          <rdf:rest>
+            <rdf:Description>
+              <rdf:first>
+                <swrl:DatavaluedPropertyAtom>
+                  <swrl:propertyPredicate rdf:resource="#LowThreshold"/>
+                  <swrl:argument1 rdf:resource="urn:swrl#i"/>
+                  <swrl:argument2 rdf:resource="urn:swrl#t"/>
+                </swrl:DatavaluedPropertyAtom>
+              </rdf:first>
+              <rdf:rest>
+                <rdf:Description>
+                  <rdf:first>
+                    <swrl:BuiltinAtom>
+                      <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThanOrEqual"/>
+                      <swrl:arguments>
+                        <rdf:Description>
+                          <rdf:first rdf:resource="urn:swrl#q"/>
+                          <rdf:rest>
+                            <rdf:Description>
+                              <rdf:first rdf:resource="urn:swrl#t"/>
+                              <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                            </rdf:Description>
+                          </rdf:rest>
+                        </rdf:Description>
+                      </swrl:arguments>
+                    </swrl:BuiltinAtom>
+                  </rdf:first>
+                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                </rdf:Description>
+              </rdf:rest>
+            </rdf:Description>
+          </rdf:rest>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:DatavaluedPropertyAtom>
+          <swrl:propertyPredicate rdf:resource="#NeedsRestock"/>
+          <swrl:argument1 rdf:resource="urn:swrl#i"/>
+          <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</swrl:argument2>
+        </swrl:DatavaluedPropertyAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#Inventory"/>
+          <swrl:argument1 rdf:resource="urn:swrl#i"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:DatavaluedPropertyAtom>
+              <swrl:propertyPredicate rdf:resource="#AvailableQuantity"/>
+              <swrl:argument1 rdf:resource="urn:swrl#i"/>
+              <swrl:argument2 rdf:resource="urn:swrl#q"/>
+            </swrl:DatavaluedPropertyAtom>
+          </rdf:first>
+          <rdf:rest>
+            <rdf:Description>
+              <rdf:first>
+                <swrl:DatavaluedPropertyAtom>
+                  <swrl:propertyPredicate rdf:resource="#LowThreshold"/>
+                  <swrl:argument1 rdf:resource="urn:swrl#i"/>
+                  <swrl:argument2 rdf:resource="urn:swrl#t"/>
+                </swrl:DatavaluedPropertyAtom>
+              </rdf:first>
+              <rdf:rest>
+                <rdf:Description>
+                  <rdf:first>
+                    <swrl:BuiltinAtom>
+                      <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#lessThan"/>
+                      <swrl:arguments>
+                        <rdf:Description>
+                          <rdf:first rdf:resource="urn:swrl#q"/>
+                          <rdf:rest>
+                            <rdf:Description>
+                              <rdf:first rdf:resource="urn:swrl#t"/>
+                              <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                            </rdf:Description>
+                          </rdf:rest>
+                        </rdf:Description>
+                      </swrl:arguments>
+                    </swrl:BuiltinAtom>
+                  </rdf:first>
+                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                </rdf:Description>
+              </rdf:rest>
+            </rdf:Description>
+          </rdf:rest>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:DatavaluedPropertyAtom>
+          <swrl:propertyPredicate rdf:resource="#NeedsRestock"/>
+          <swrl:argument1 rdf:resource="urn:swrl#i"/>
+          <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrl:argument2>
+        </swrl:DatavaluedPropertyAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#Customer"/>
+          <swrl:argument1 rdf:resource="urn:swrl#c"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:IndividualPropertyAtom>
+              <swrl:propertyPredicate rdf:resource="#Purchases"/>
+              <swrl:argument1 rdf:resource="urn:swrl#c"/>
+              <swrl:argument2 rdf:resource="urn:swrl#b"/>
+            </swrl:IndividualPropertyAtom>
+          </rdf:first>
+          <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:IndividualPropertyAtom>
+          <swrl:propertyPredicate rdf:resource="#HasPurchased"/>
+          <swrl:argument1 rdf:resource="urn:swrl#c"/>
+          <swrl:argument2 rdf:resource="urn:swrl#b"/>
+        </swrl:IndividualPropertyAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
 
 
 </rdf:RDF>

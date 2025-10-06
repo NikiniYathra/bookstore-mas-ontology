@@ -42,6 +42,7 @@ class OrderRecord(BaseModel):
     order_id: str
     customer: str
     book: str
+    genre: str
     step: int
     price: float
 

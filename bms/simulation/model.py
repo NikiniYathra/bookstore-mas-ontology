@@ -233,16 +233,39 @@ class BookstoreModel(Model):
         employee = EmployeeAgent(unique_id=employee_id, model=self, message_bus=self.message_bus)
         self.schedule.add(employee)
 
-        for idx in range(2):
-            customer_id = f"customer::{idx}"
-            self._ensure_customer_entity(customer_id)
-            customer = CustomerAgent(
-                unique_id=customer_id,
-                model=self,
-                policy=self.customer_policy,
-                budget=50.0,
-            )
-            self.schedule.add(customer)
+        customer_entities = sorted(self.ontology.Customer.instances(), key=lambda entry: entry.name)
+        if customer_entities:
+            for entity in customer_entities:
+                unique_id = entity.name
+                self.customer_entities[entity.name] = entity
+                budgets = list(getattr(entity, "HasBudget", []))
+                try:
+                    budget = float(budgets[0]) if budgets else 50.0
+                except (TypeError, ValueError):
+                    budget = 50.0
+                if not budgets:
+                    entity.HasBudget = [budget]
+                customer = CustomerAgent(
+                    unique_id=unique_id,
+                    model=self,
+                    policy=self.customer_policy,
+                    budget=budget,
+                )
+                self.schedule.add(customer)
+        else:
+            for idx in range(2):
+                customer_id = f"customer::{idx}"
+                entity = self._ensure_customer_entity(customer_id)
+                budgets = list(getattr(entity, "HasBudget", []))
+                if not budgets:
+                    entity.HasBudget = [50.0]
+                customer = CustomerAgent(
+                    unique_id=customer_id,
+                    model=self,
+                    policy=self.customer_policy,
+                    budget=50.0,
+                )
+                self.schedule.add(customer)
 
     def _process_purchase_events(self) -> None:
         """Drain the purchase queue, update inventory, and record ontology facts."""
@@ -280,11 +303,14 @@ class BookstoreModel(Model):
         order = self.ontology.Order(order_name)
         order.OrderedBy = [customer]
         order.OrderedBook = [book]
+        genre_values = list(getattr(book, "HasGenre", []))
+        genre = str(genre_values[0]) if genre_values else "Unknown"
         self.purchase_log.append(
             {
                 "order": order_name,
                 "customer": customer_id,
                 "book": book_id,
+                "genre": genre,
                 "price": price,
                 "step": self.step_count,
             }
@@ -316,6 +342,8 @@ class BookstoreModel(Model):
             return entity
         with self.ontology:
             entity = self.ontology.Customer(name)
+        if not getattr(entity, "HasBudget", []):
+            entity.HasBudget = [50.0]
         self.customer_entities[name] = entity
         return entity
 

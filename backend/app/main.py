@@ -51,6 +51,7 @@ def get_orders() -> List[schemas.OrderRecord]:
             order_id=entry.get("order"),
             customer=entry.get("customer"),
             book=entry.get("book"),
+            genre=entry.get("genre", "Unknown"),
             step=entry.get("step", 0),
             price=float(entry.get("price", 0.0)),
         )

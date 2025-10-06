@@ -1,29 +1,232 @@
 [
     {
-        "isbn":  "9780143127741",
-        "title":  "Sapiens",
-        "author":  "Yuval Noah Harari",
-        "genre":  "Non-Fiction",
-        "price":  19.99,
-        "quantity":  12,
-        "low_threshold":  11
+      "isbn": "9781000000001",
+      "title": "The Alchemist",
+      "author": "Paulo Coelho",
+      "genre": "Fiction",
+      "price": 14.99,
+      "quantity": 6,
+      "threshold": 6
     },
     {
-        "isbn":  "9780062315007",
-        "title":  "The Alchemist",
-        "author":  "Paulo Coelho",
-        "genre":  "Fiction",
-        "price":  14.99,
-        "quantity":  8,
-        "low_threshold":  7
+      "isbn": "9781000000002",
+      "title": "Normal People",
+      "author": "Sally Rooney",
+      "genre": "Fiction",
+      "price": 13.49,
+      "quantity": 8,
+      "threshold": 5
     },
     {
-        "isbn":  "9780590353427",
-        "title":  "Harry Potter and the Sorcerer\u0027s Stone",
-        "author":  "J.K. Rowling",
-        "genre":  "Fantasy",
-        "price":  10.99,
-        "quantity":  5,
-        "low_threshold":  4
+      "isbn": "9781000000003",
+      "title": "Where the Crawdads Sing",
+      "author": "Delia Owens",
+      "genre": "Fiction",
+      "price": 16.99,
+      "quantity": 4,
+      "threshold": 6
+    },
+    {
+      "isbn": "9781000000004",
+      "title": "The Kite Runner",
+      "author": "Khaled Hosseini",
+      "genre": "Fiction",
+      "price": 12.99,
+      "quantity": 10,
+      "threshold": 5
+    },
+    {
+      "isbn": "9781000000005",
+      "title": "The Night Circus",
+      "author": "Erin Morgenstern",
+      "genre": "Fiction",
+      "price": 11.49,
+      "quantity": 7,
+      "threshold": 5
+    },
+  
+    {
+      "isbn": "9781000000006",
+      "title": "Harry Potter and the Sorcerer's Stone",
+      "author": "J.K. Rowling",
+      "genre": "Fantasy",
+      "price": 10.99,
+      "quantity": 4,
+      "threshold": 5
+    },
+    {
+      "isbn": "9781000000007",
+      "title": "The Name of the Wind",
+      "author": "Patrick Rothfuss",
+      "genre": "Fantasy",
+      "price": 18.99,
+      "quantity": 9,
+      "threshold": 6
+    },
+    {
+      "isbn": "9781000000008",
+      "title": "Mistborn: The Final Empire",
+      "author": "Brandon Sanderson",
+      "genre": "Fantasy",
+      "price": 15.99,
+      "quantity": 6,
+      "threshold": 7
+    },
+    {
+      "isbn": "9781000000009",
+      "title": "The Way of Kings",
+      "author": "Brandon Sanderson",
+      "genre": "Fantasy",
+      "price": 19.49,
+      "quantity": 11,
+      "threshold": 6
+    },
+    {
+      "isbn": "9781000000010",
+      "title": "The Hobbit",
+      "author": "J.R.R. Tolkien",
+      "genre": "Fantasy",
+      "price": 9.99,
+      "quantity": 8,
+      "threshold": 5
+    },
+  
+    {
+      "isbn": "9781000000011",
+      "title": "Dune",
+      "author": "Frank Herbert",
+      "genre": "Sci-Fi",
+      "price": 17.99,
+      "quantity": 5,
+      "threshold": 6
+    },
+    {
+      "isbn": "9781000000012",
+      "title": "Neuromancer",
+      "author": "William Gibson",
+      "genre": "Sci-Fi",
+      "price": 13.99,
+      "quantity": 7,
+      "threshold": 5
+    },
+    {
+      "isbn": "9781000000013",
+      "title": "Project Hail Mary",
+      "author": "Andy Weir",
+      "genre": "Sci-Fi",
+      "price": 21.99,
+      "quantity": 6,
+      "threshold": 7
+    },
+    {
+      "isbn": "9781000000014",
+      "title": "The Martian",
+      "author": "Andy Weir",
+      "genre": "Sci-Fi",
+      "price": 11.99,
+      "quantity": 12,
+      "threshold": 6
+    },
+    {
+      "isbn": "9781000000015",
+      "title": "Foundation",
+      "author": "Isaac Asimov",
+      "genre": "Sci-Fi",
+      "price": 12.49,
+      "quantity": 9,
+      "threshold": 5
+    },
+  
+    {
+      "isbn": "9781000000016",
+      "title": "Sapiens",
+      "author": "Yuval Noah Harari",
+      "genre": "Non-fiction",
+      "price": 19.99,
+      "quantity": 8,
+      "threshold": 7
+    },
+    {
+      "isbn": "9781000000017",
+      "title": "Educated",
+      "author": "Tara Westover",
+      "genre": "Non-fiction",
+      "price": 14.99,
+      "quantity": 5,
+      "threshold": 6
+    },
+    {
+      "isbn": "9781000000018",
+      "title": "Atomic Habits",
+      "author": "James Clear",
+      "genre": "Non-fiction",
+      "price": 16.49,
+      "quantity": 7,
+      "threshold": 6
+    },
+    {
+      "isbn": "9781000000019",
+      "title": "Thinking, Fast and Slow",
+      "author": "Daniel Kahneman",
+      "genre": "Non-fiction",
+      "price": 18.49,
+      "quantity": 6,
+      "threshold": 8
+    },
+    {
+      "isbn": "9781000000020",
+      "title": "The Power of Habit",
+      "author": "Charles Duhigg",
+      "genre": "Non-fiction",
+      "price": 13.49,
+      "quantity": 10,
+      "threshold": 6
+    },
+  
+    {
+      "isbn": "9781000000021",
+      "title": "The Girl with the Dragon Tattoo",
+      "author": "Stieg Larsson",
+      "genre": "Mystery",
+      "price": 12.99,
+      "quantity": 7,
+      "threshold": 6
+    },
+    {
+      "isbn": "9781000000022",
+      "title": "Gone Girl",
+      "author": "Gillian Flynn",
+      "genre": "Mystery",
+      "price": 11.99,
+      "quantity": 4,
+      "threshold": 6
+    },
+    {
+      "isbn": "9781000000023",
+      "title": "Big Little Lies",
+      "author": "Liane Moriarty",
+      "genre": "Mystery",
+      "price": 10.99,
+      "quantity": 8,
+      "threshold": 5
+    },
+    {
+      "isbn": "9781000000024",
+      "title": "The Silent Patient",
+      "author": "Alex Michaelides",
+      "genre": "Mystery",
+      "price": 13.99,
+      "quantity": 5,
+      "threshold": 7
+    },
+    {
+      "isbn": "9781000000025",
+      "title": "The Da Vinci Code",
+      "author": "Dan Brown",
+      "genre": "Mystery",
+      "price": 9.99,
+      "quantity": 11,
+      "threshold": 6
     }
-]
+  ]
+  

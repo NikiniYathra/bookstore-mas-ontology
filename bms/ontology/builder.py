@@ -84,6 +84,10 @@ class BookstoreOntologyBuilder:
                 domain = [Customer]
                 range = [Book]
 
+            class HasBudget(DataProperty):
+                domain = [Customer]
+                range = [float]
+
             class OrderedBy(ObjectProperty):
                 domain = [Order]
                 range = [Customer]
@@ -115,6 +119,30 @@ class BookstoreOntologyBuilder:
                 inventory.NeedsRestock = [quantity < threshold]
                 if hasattr(inventory, "TracksBook") and not getattr(inventory, "TracksBook", []):
                     inventory.TracksBook = [book]
+
+    def add_customers(self, customers: Iterable[Mapping[str, object]], default_budget: float = 50.0) -> bool:
+        """Create customer individuals for the supplied profiles."""
+
+        updated = False
+        with self.onto:
+            for record in customers:
+                identifier = str(record.get("id") or record.get("customer_id") or record.get("name") or "").strip()
+                if not identifier:
+                    continue
+                name = identifier.replace("::", "_")
+                customer = self.onto.Customer(name)
+                try:
+                    budget_value = float(record.get("budget", default_budget))
+                except (TypeError, ValueError):
+                    budget_value = float(default_budget)
+                existing = list(getattr(customer, "HasBudget", []))
+                if not existing:
+                    customer.HasBudget = [budget_value]
+                    updated = True
+                elif float(existing[0]) != budget_value:
+                    customer.HasBudget = [budget_value]
+                    updated = True
+        return updated
 
     def ensure_inventory_for(self, book: "Thing") -> "Thing":
         """Return the inventory individual linked to *book*, creating one if missing."""

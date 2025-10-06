@@ -1,4 +1,4 @@
-import { useInventoryQuery, useOrdersQuery } from "@/lib/query";
+import { useOrdersQuery } from "@/lib/query";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import {
   ResponsiveContainer,
@@ -12,18 +12,11 @@ import {
 const COLORS = ["#38bdf8", "#c084fc", "#f59e0b", "#34d399", "#f472b6", "#f97316", "#0ea5e9"];
 
 export function SalesByGenre() {
-  const { data: orders, isLoading: loadingOrders, isError: ordersError, error: ordersErr } = useOrdersQuery();
-  const { data: inventory, isLoading: loadingInventory, isError: inventoryError, error: inventoryErr } = useInventoryQuery();
-
-  const genreByIsbn = new Map<string, string>();
-  inventory?.forEach((item) => {
-    // Genre information is not currently provided by the API; fall back to Unknown.
-    genreByIsbn.set(item.isbn, "Unknown");
-  });
+  const { data: orders, isLoading, isError, error } = useOrdersQuery();
 
   const counts = new Map<string, number>();
   orders?.forEach((order) => {
-    const genre = genreByIsbn.get(order.book) ?? "Unknown";
+    const genre = order.genre && order.genre.trim() ? order.genre : "Unknown";
     counts.set(genre, (counts.get(genre) ?? 0) + 1);
   });
 
@@ -35,13 +28,13 @@ export function SalesByGenre() {
         <CardTitle>Sales by Genre</CardTitle>
       </CardHeader>
       <CardContent className="h-72">
-        {ordersError || inventoryError ? (
+        {isError ? (
           <div className="rounded-md border border-red-500/40 bg-red-500/10 p-3 text-sm text-red-200">
-            Failed to load sales data: {(ordersErr || inventoryErr)?.message}
+            Failed to load sales data: {error.message}
           </div>
-        ) : loadingOrders || loadingInventory ? (
+        ) : isLoading ? (
           <div className="flex h-full items-center justify-center text-sm text-slate-400">
-            Loading chart…
+            Loading chart...
           </div>
         ) : chartData.length === 0 ? (
           <div className="flex h-full items-center justify-center text-sm text-slate-400">

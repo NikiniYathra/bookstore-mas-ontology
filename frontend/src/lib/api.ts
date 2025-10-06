@@ -14,6 +14,7 @@ const OrderRecordSchema = z.object({
   order_id: z.string(),
   customer: z.string(),
   book: z.string(),
+  genre: z.string(),
   step: z.number(),
   price: z.number(),
 });

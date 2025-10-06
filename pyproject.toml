@@ -2,7 +2,7 @@
 name = "bms"
 version = "0.1.0"
 description = "Ontology-backed multi-agent bookstore management system starter"
-authors = [{ name = "CSAT Student" }]
+authors = [{ name = "Nikini Yathra" }]
 requires-python = ">=3.10"
 dependencies = [
     "mesa==2.1.5",

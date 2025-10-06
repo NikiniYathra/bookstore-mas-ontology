@@ -1,0 +1,32 @@
+[
+  {
+    "id": "customer_ava_carter",
+    "name": "Ava Carter",
+    "budget": 75.0
+  },
+  {
+    "id": "customer_ben_ortiz",
+    "name": "Ben Ortiz",
+    "budget": 62.5
+  },
+  {
+    "id": "customer_chloe_nguyen",
+    "name": "Chloe Nguyen",
+    "budget": 58.0
+  },
+  {
+    "id": "customer_darius_khan",
+    "name": "Darius Khan",
+    "budget": 81.0
+  },
+  {
+    "id": "customer_elena_martinez",
+    "name": "Elena Martinez",
+    "budget": 69.5
+  },
+  {
+    "id": "customer_farrah_jones",
+    "name": "Farrah Jones",
+    "budget": 54.0
+  }
+]

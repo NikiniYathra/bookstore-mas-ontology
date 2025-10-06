@@ -7,3 +7,5 @@ numpy
 pandas
 networkx
 tqdm
+eval_type_backport
+pytest>=7.4

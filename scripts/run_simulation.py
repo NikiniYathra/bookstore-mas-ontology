@@ -23,6 +23,14 @@ def _load_sample_inventory() -> list[dict[str, object]]:
         return json.load(handle)
 
 
+def _load_sample_customers() -> list[dict[str, object]]:
+    data_path = ROOT / "bms" / "data" / "sample_customers.json"
+    if not data_path.exists():
+        return []
+    with data_path.open("r", encoding="utf-8") as handle:
+        return json.load(handle)
+
+
 def main() -> None:
     config = load_config()
     if config.simulation.random_seed is not None:
@@ -37,6 +45,9 @@ def main() -> None:
         _load_sample_inventory(),
         default_threshold=config.simulation.restock_threshold,
     )
+    customers = _load_sample_customers()
+    if customers:
+        builder.add_customers(customers)
     builder.save()
 
     rules = build_default_rules(builder.onto)

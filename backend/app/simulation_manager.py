@@ -27,6 +27,7 @@ class SimulationManager:
             storage_path=self.config.ontology.storage_path,
         )
         self.ontology_path = self.builder.storage_path
+        self.customer_seed_data = self._load_sample_customers()
         self._prepare_ontology()
         self.model = self._create_model()
 
@@ -43,6 +44,7 @@ class SimulationManager:
                 self._bootstrap_ontology()
         else:
             self._bootstrap_ontology()
+        self._seed_customers_if_missing()
         rules = build_default_rules(self.builder.onto)
         activate_rules(rules.values())
 
@@ -55,6 +57,8 @@ class SimulationManager:
             inventory,
             default_threshold=self.config.simulation.restock_threshold,
         )
+        if self.customer_seed_data:
+            self.builder.add_customers(self.customer_seed_data)
         self.builder.save()
 
     def _create_model(self) -> BookstoreModel:
@@ -67,6 +71,19 @@ class SimulationManager:
         data_path = Path("bms") / "data" / "sample_inventory.json"
         with data_path.open("r", encoding="utf-8") as handle:
             return json.load(handle)
+
+    def _load_sample_customers(self) -> List[Dict[str, object]]:
+        data_path = Path("bms") / "data" / "sample_customers.json"
+        if not data_path.exists():
+            return []
+        with data_path.open("r", encoding="utf-8") as handle:
+            return json.load(handle)
+
+    def _seed_customers_if_missing(self) -> None:
+        if not getattr(self, "customer_seed_data", None):
+            return
+        if self.builder.add_customers(self.customer_seed_data):
+            self.builder.save()
 
     def _persist(self) -> None:
         self.builder.save()
@@ -103,6 +120,7 @@ class SimulationManager:
             if self.ontology_path.exists():
                 self.builder.onto.load(file=str(self.ontology_path))
                 self.builder.build_schema()
+            self._seed_customers_if_missing()
             rules = build_default_rules(self.builder.onto)
             activate_rules(rules.values())
             self.model = self._create_model()
@@ -130,7 +148,12 @@ class SimulationManager:
 
     def get_orders(self) -> List[Dict[str, object]]:
         with self._lock:
-            return [record.copy() for record in self.model.purchase_log]
+            orders: List[Dict[str, object]] = []
+            for record in self.model.purchase_log:
+                entry = record.copy()
+                entry.setdefault("genre", "Unknown")
+                orders.append(entry)
+            return orders
 
     def get_restocks(self) -> List[Dict[str, object]]:
         with self._lock:
