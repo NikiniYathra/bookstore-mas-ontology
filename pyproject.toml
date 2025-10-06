@@ -1,0 +1,24 @@
+[project]
+name = "bms"
+version = "0.1.0"
+description = "Ontology-backed multi-agent bookstore management system starter"
+authors = [{ name = "CSAT Student" }]
+requires-python = ">=3.10"
+dependencies = [
+    "mesa==2.1.5",
+    "owlready2>=0.44,<0.45",
+    "pydantic>=2.6.4",
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.27",
+    "numpy",
+    "pandas",
+    "networkx",
+    "tqdm"
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+addopts = "-q"

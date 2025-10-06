@@ -1,0 +1,9 @@
+mesa==2.1.5
+owlready2>=0.44,<0.45
+fastapi>=0.110
+uvicorn[standard]>=0.27
+pydantic>=2
+numpy
+pandas
+networkx
+tqdm

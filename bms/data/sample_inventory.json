@@ -1,0 +1,29 @@
+[
+    {
+        "isbn":  "9780143127741",
+        "title":  "Sapiens",
+        "author":  "Yuval Noah Harari",
+        "genre":  "Non-Fiction",
+        "price":  19.99,
+        "quantity":  12,
+        "low_threshold":  11
+    },
+    {
+        "isbn":  "9780062315007",
+        "title":  "The Alchemist",
+        "author":  "Paulo Coelho",
+        "genre":  "Fiction",
+        "price":  14.99,
+        "quantity":  8,
+        "low_threshold":  7
+    },
+    {
+        "isbn":  "9780590353427",
+        "title":  "Harry Potter and the Sorcerer\u0027s Stone",
+        "author":  "J.K. Rowling",
+        "genre":  "Fantasy",
+        "price":  10.99,
+        "quantity":  5,
+        "low_threshold":  4
+    }
+]
